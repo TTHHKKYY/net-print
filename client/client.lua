@@ -23,4 +23,4 @@ out[1] = file
 out[2] = table.concat(content)
 
 modem.transmit(port,reply,out)
-print("Sent.")
+print("Sent")

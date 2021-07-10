@@ -48,6 +48,6 @@ while true do
 		end
 		
 		printer.endPage()
-		print("Done.")
+		print("Done")
 	end
 end
