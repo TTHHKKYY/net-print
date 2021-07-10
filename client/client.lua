@@ -5,7 +5,7 @@ local arguments = {...}
 local file = arguments[1]
 
 for _,name in pairs(modules) do
-	if string.match(name,"modem_") then
+	if string.match(name,"modem") then
 		if peripheral.call(name,"isWireless") then
 			modem = peripheral.wrap(name)
 			break
