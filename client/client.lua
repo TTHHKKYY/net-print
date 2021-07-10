@@ -8,7 +8,7 @@ local arguments = {...}
 local file = arguments[1]
 
 for _,name in pairs(modules) do
-	if if peripheral.getType(name) == "modem" then
+	if peripheral.getType(name) == "modem" then
 		if peripheral.call(name,"isWireless") then
 			modem = peripheral.wrap(name)
 			break

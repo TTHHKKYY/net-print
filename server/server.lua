@@ -6,7 +6,7 @@ local incoming = 65088
 local reply = 65087
 
 for _,name in pairs(modules) do
-	if if peripheral.getType(name) == "modem" then
+	if peripheral.getType(name) == "modem" then
 		if peripheral.call(name,"isWireless") then
 			modem = peripheral.wrap(name)
 			break
@@ -15,8 +15,8 @@ for _,name in pairs(modules) do
 end
 
 for _,name in pairs(modules) do
-	if if peripheral.getType(name) == "printer" then
-		modem = peripheral.wrap(name)
+	if peripheral.getType(name) == "printer" then
+		printer = peripheral.wrap(name)
 		break
 	end
 end
@@ -46,7 +46,6 @@ while true do
 		print("Printing...")
 		
 		for i=1,#content do
-			
 			if i % printer.getPageSize() == 0 then
 				if printer.getPaperLevel() == 0 then
 					print("Ran out of paper.")
@@ -56,11 +55,12 @@ while true do
 				printer.newPage()
 				printer.setPageTitle(name)
 			end
-
 			if printer.getInkLevel() == 0 then
 				print("Ran out of dye.")
 				break
 			end
+			
+			printer.write(string.sub(content,i,i))
 		end
 		
 		printer.endPage()
