@@ -1,11 +1,12 @@
 local modules = peripheral.getNames()
-local printer,modem
+local printer
+local modem
 
 local incoming = 65088
 local reply = 65087
 
 for _,name in pairs(modules) do
-	if string.match(name,"modem") then
+	if if peripheral.getType(name) == "modem" then
 		if peripheral.call(name,"isWireless") then
 			modem = peripheral.wrap(name)
 			break
@@ -14,8 +15,9 @@ for _,name in pairs(modules) do
 end
 
 for _,name in pairs(modules) do
-	if string.match(name,"printer") then
-		printer = peripheral.wrap(name)
+	if if peripheral.getType(name) == "printer" then
+		modem = peripheral.wrap(name)
+		break
 	end
 end
 
