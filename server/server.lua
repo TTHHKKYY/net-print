@@ -1,12 +1,26 @@
-local modem = peripheral.find("modem")
-local printer = peripheral.find("printer")
-
-assert(printer,"No printer.")
-assert(modem,"No modem.")
-assert(modem.isWireless(),"Modem is not rednet capable.")
+local modules = peripheral.getNames()
+local printer,modem
 
 local incoming = 65088
 local reply = 65087
+
+for _,name in pairs(modules) do
+	if string.match(name,"modem") then
+		if peripheral.call(name,"isWireless") then
+			modem = peripheral.wrap(name)
+			break
+		end
+	end
+end
+
+for _,name in pairs(modules) do
+	if string.match(name,"printer") then
+		printer = peripheral.wrap(name)
+	end
+end
+
+assert(printer,"No printer.")
+assert(modem,"No modem.")
 
 modem.open(incoming)
 modem.open(reply)

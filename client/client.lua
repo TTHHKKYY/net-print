@@ -1,10 +1,19 @@
-local modem = peripheral.find("modem")
+local modules = peripheral.getNames()
+local modem
 
 local arguments = {...}
 local file = arguments[1]
 
+for _,name in pairs(modules) do
+	if string.match(name,"modem_") then
+		if peripheral.call(name,"isWireless") then
+			modem = peripheral.wrap(name)
+			break
+		end
+	end
+end
+
 assert(modem,"No modem.")
-assert(modem.isWireless(),"Modem is not rednet capable.")
 assert(file,"No file.")
 
 local port = 65088
