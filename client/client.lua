@@ -32,7 +32,7 @@ end
 
 out[1] = server
 out[2] = file
-out[3] = table.concat(content)
+out[3] = table.concat(content,"\n")
 
 modem.transmit(port,reply,out)
 print("Sent")
