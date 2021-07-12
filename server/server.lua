@@ -43,7 +43,7 @@ while true do
 		local name = data[2]
 		local content = data[3]
 		
-		if server == Host then
+		if server == host then
 			printer.newPage()
 			printer.setPageTitle()
 			print("Printing...")
