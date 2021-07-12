@@ -2,6 +2,8 @@ local modules = peripheral.getNames()
 local printer
 local modem
 
+local host = os.getComputerID()
+
 local incoming = 65088
 local reply = 65087
 
@@ -22,7 +24,7 @@ for _,name in pairs(modules) do
 end
 
 assert(printer,"No printer.")
-assert(modem,"No modem.")
+assert(modem,"No wireless modem.")
 
 modem.open(incoming)
 modem.open(reply)
@@ -37,10 +39,11 @@ while true do
 		return
 	end
 	if event == "modem_message" and port == incoming then
-		if data[1] == os.getComputerId() then
-			local name = data[2]
-			local content = data[3]
-			
+		local server = data[1]
+		local name = data[2]
+		local content = data[3]
+		
+		if server == Host then
 			printer.newPage()
 			printer.setPageTitle()
 			print("Printing...")

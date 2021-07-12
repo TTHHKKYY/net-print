@@ -5,8 +5,8 @@ local port = 65088
 local reply = 65087
 
 local arguments = {...}
-local file = arguments[1]
-local server = arguments[2]
+local server = arguments[1]
+local file = arguments[2]
 
 for _,name in pairs(modules) do
 	if peripheral.getType(name) == "modem" then
@@ -17,9 +17,9 @@ for _,name in pairs(modules) do
 	end
 end
 
-assert(modem,"No modem.")
-assert(file,"No file.")
+assert(modem,"No wireless modem.")
 assert(server,"No server address.")
+assert(file,"No file.")
 
 local input = io.open(file,"r")
 
