@@ -44,26 +44,33 @@ while true do
 		local content = data[3]
 		
 		if tonumber(server) == host then
+			local line = 1
+			
 			printer.newPage()
 			printer.setPageTitle()
+			printer.setCursorPos(1,1)
 			print("Printing...")
 			
 			for i=1,#content do
-				if i % printer.getPageSize() == 0 then
-					if printer.getPaperLevel() == 0 then
-						print("Ran out of paper.")
-						break
-					end
-					
-					printer.newPage()
-					printer.setPageTitle(name)
+				local letter = string.sub(content,i,i)
+				local x,y = printer.getCursorPos()
+				
+				if letter = "\n" then
+					line = line + 1
+					printer.setCursorPos(1,line)
 				end
+				--[[
+				if x % printer.getPageSize() == 0 then
+					line = line + 1
+					printer.setCursorPos(1,line)
+				end
+				--]]
 				if printer.getInkLevel() == 0 then
 					print("Ran out of dye.")
 					break
 				end
 				
-				printer.write(string.sub(content,i,i))
+				printer.write(letter)
 			end
 			
 			printer.endPage()
