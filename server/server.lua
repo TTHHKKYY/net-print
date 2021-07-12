@@ -34,36 +34,37 @@ while true do
 		modem.close(incoming)
 		modem.close(reply)
 		print("Stopped Server")
-		
 		return
 	end
 	if event == "modem_message" and port == incoming then
-		local name = data[1]
-		local content = data[2]
-		
-		printer.newPage()
-		printer.setPageTitle(name)
-		print("Printing...")
-		
-		for i=1,#content do
-			if i % printer.getPageSize() == 0 then
-				if printer.getPaperLevel() == 0 then
-					print("Ran out of paper.")
+		if data[1] == os.getComputerId() then
+			local name = data[2]
+			local content = data[3]
+			
+			printer.newPage()
+			printer.setPageTitle()
+			print("Printing...")
+			
+			for i=1,#content do
+				if i % printer.getPageSize() == 0 then
+					if printer.getPaperLevel() == 0 then
+						print("Ran out of paper.")
+						break
+					end
+					
+					printer.newPage()
+					printer.setPageTitle(name)
+				end
+				if printer.getInkLevel() == 0 then
+					print("Ran out of dye.")
 					break
 				end
 				
-				printer.newPage()
-				printer.setPageTitle(name)
-			end
-			if printer.getInkLevel() == 0 then
-				print("Ran out of dye.")
-				break
+				printer.write(string.sub(content,i,i))
 			end
 			
-			printer.write(string.sub(content,i,i))
+			printer.endPage()
+			print("Done")
 		end
-		
-		printer.endPage()
-		print("Done")
 	end
 end
