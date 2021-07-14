@@ -48,7 +48,7 @@ while true do
 			local line = 1
 			
 			printer.newPage()
-			printer.setPageTitle()
+			printer.setPageTitle(name)
 			printer.setCursorPos(1,1)
 			print("Printing...")
 			
