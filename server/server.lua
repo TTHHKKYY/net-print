@@ -55,7 +55,7 @@ while true do
 				local letter = string.sub(content,i,i)
 				local x,y = printer.getCursorPos()
 				
-				if letter = "\n" then
+				if letter == "\n" then
 					line = line + 1
 					printer.setCursorPos(1,line)
 				end
