@@ -26,6 +26,7 @@ end
 assert(printer,"No printer.")
 assert(modem,"No wireless modem.")
 
+print(host)
 modem.open(incoming)
 modem.open(reply)
 
